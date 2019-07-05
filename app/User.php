@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\UserVerifyEmail;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
@@ -28,4 +29,9 @@ class User extends Authenticatable implements MustVerifyEmailContract
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new UserVerifyEmail);
+    }
 }

@@ -40,7 +40,7 @@ class RegisterController extends Controller
         $this->middleware('guest:admin');
     }
 
-    public function showRegisterForm()
+    public function showRegistrationForm()
     {
         return view('admin.auth.register');
     }

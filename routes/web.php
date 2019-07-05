@@ -17,17 +17,10 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
-    Route::get('/', 'HomeController@index')->name('admin.home');
-    // home
-    Route::get('home', 'HomeController@index')->name('admin.home');
-    // login logout
-    Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');
-    Route::post('login', 'Auth\LoginController@login')->name('admin.login');
-    Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
-    // register
-    Route::get('register', 'Auth\RegisterController@showRegisterForm')->name('admin.register');
-    Route::post('register', 'Auth\RegisterController@register')->name('admin.register');
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'name' => 'admin.', 'as' => 'admin.'], function() {
+    Auth::routes(['verify' => true]);
+    Route::get('/', 'HomeController@index')->middleware('verified:admin')->name('home');
+    Route::get('/home', 'HomeController@index')->middleware('verified:admin')->name('home');
 });
 
 Route::get('/home', 'HomeController@index')->middleware('verified')->name('home');
