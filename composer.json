@@ -12,7 +12,11 @@
         "barryvdh/laravel-debugbar": "^3.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/socialite": "^4.1",
+        "laravel/tinker": "^1.0",
+        "socialiteproviders/google": "^3.0",
+        "socialiteproviders/line": "^2.1",
+        "socialiteproviders/twitter": "^3.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

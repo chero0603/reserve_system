@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -36,6 +37,24 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * OAuth redirect
+     *
+     * @param str $provider
+     * @return \Illuminate\Http\Response
+     */
+    public function socialLogin($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleSocialCallback($social)
+    {
+        //ソーシャルサービス（情報）を取得
+        $userSocial = Socialite::driver($social)->stateless()->user();
+        dd($userSocial);
     }
 
     public function logout(Request $request)

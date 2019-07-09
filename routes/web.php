@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true, 'reset' => true]);
+Route::get('/login/{provider}', 'Auth\LoginController@socialLogin');
+Route::get('/login/{provider}/callback', 'Auth\LoginController@handleSocialCallback');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'name' => 'admin.', 'as' => 'admin.'], function() {
     Auth::routes(['verify' => true, 'reset' => true]);

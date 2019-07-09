@@ -40,4 +40,9 @@ class User extends Authenticatable implements MustVerifyEmailContract
     {
         $this->notify(new UserResetPassword($token));
     }
+
+    public function socials()
+    {
+        return $this->hasMany('App\Social');
+    }
 }
