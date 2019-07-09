@@ -52,9 +52,12 @@ class LoginController extends Controller
 
     public function handleSocialCallback($social)
     {
-        //ソーシャルサービス（情報）を取得
-        $userSocial = Socialite::driver($social)->stateless()->user();
-        dd($userSocial);
+        try {
+            $social_user = Socialite::driver($social)->stateless()->user();
+        } catch (\Exception $e) {
+            return redirect('/login');
+        }
+        dd($social_user);
     }
 
     public function logout(Request $request)
