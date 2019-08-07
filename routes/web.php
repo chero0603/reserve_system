@@ -21,9 +21,12 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleSocialCallb
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'name' => 'admin.', 'as' => 'admin.'], function() {
     Auth::routes(['verify' => true, 'reset' => true]);
-    Route::get('/', 'HomeController@index')->middleware('verified:admin')->name('home');
-    Route::get('/home', 'HomeController@index')->middleware('verified:admin')->name('home');
+    Route::middleware('verified:admin')->group( function() {
+        Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/home', 'HomeController@index')->name('home');
+    });
 });
 
-Route::get('/home', 'HomeController@index')->middleware('verified')->name('home');
-
+Route::middleware('verified')->group( function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
