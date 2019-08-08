@@ -15,7 +15,6 @@ class CreateSocialsTable extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('user_id');
             $table->string('provider_name')->nullable();
             $table->string('provider_id')->unique()->nullable();
             $table->timestamps();

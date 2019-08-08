@@ -50,14 +50,18 @@ class LoginController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function handleSocialCallback($social)
+    public function handleSocialCallback(Request $request, $provider)
     {
         try {
-            $social_user = Socialite::driver($social)->stateless()->user();
+            $social_user = Socialite::driver($provider)->stateless()->user();
         } catch (\Exception $e) {
             return redirect('/login');
         }
-        dd($social_user);
+        
+        $request->session()->flash('_old_input', ['name' => $social_user->name, 'email' => $social_user->email]);
+        $request->session()->flash('social_data', ['provider_id' => $social_user->id, 'provider_name' => $provider, 'avatar' => $social_user->avatar]);
+
+        return redirect()->route('register');
     }
 
     public function logout(Request $request)
