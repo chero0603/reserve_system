@@ -16,8 +16,12 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true, 'reset' => true]);
-Route::get('/login/{provider}', 'Auth\LoginController@socialLogin');
-Route::get('/login/{provider}/callback', 'Auth\LoginController@handleSocialCallback');
+Route::group(['namespace' => 'Social', 'prefix' => 'social', 'name' => 'social.', 'as' => 'social.'], function() {
+    Route::get('/login/{provider}', 'Auth\LoginController@socialOauth')->name('login');
+    Route::get('/callback/{provider}', 'Auth\LoginController@handleSocialCallback')->name('callback');
+    Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('/register', 'Auth\RegisterController@register')->name('post.register');
+});
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'name' => 'admin.', 'as' => 'admin.'], function() {
     Auth::routes(['verify' => true, 'reset' => true]);

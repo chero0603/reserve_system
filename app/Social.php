@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Social extends Model
 {
 
-    protected $fillable = ['provider_name', 'provider_id' ];
+    protected $fillable = ['provider_name', 'provider_id', 'user_id'];
 
     public function user()
     {
