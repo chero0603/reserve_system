@@ -23,13 +23,13 @@ class UserVerifyEmail extends VerifyEmail
         }
 
         return (new MailMessage)
-            ->subject(Lang::getFromJson('Multi Verify Email Address'))
-            ->line(Lang::getFromJson('Please click the button below to verify your email address.'))
+            ->subject(Lang::get('Multi Verify Email Address'))
+            ->line(Lang::get('Please click the button below to verify your email address.'))
             ->action(
-                Lang::getFromJson('Verify Email Address'),
+                Lang::get('Verify Email Address'),
                 $this->verificationUrl($notifiable)
             )
-            ->line(Lang::getFromJson('If you did not create an account, no further action is required.'));
+            ->line(Lang::get('If you did not create an account, no further action is required.'));
     }
 
     /**
