@@ -49,13 +49,13 @@ class LoginController extends Controller
      */
     public function socialOauth($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::with($provider)->redirect();
     }
 
     public function handleSocialCallback(Request $request, $provider)
     {
         try {
-            $social_user = Socialite::driver($provider)->stateless()->user();
+            $social_user = Socialite::with($provider)->user();
         } catch (\Exception $e) {
             return redirect('/login');
         }
