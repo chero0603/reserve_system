@@ -41,7 +41,7 @@ class AdminVerifyEmail extends VerifyEmail
     protected function verificationUrl($notifiable)
     {
         return URL::temporarySignedRoute(
-            'admin.verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
+            'admin.verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey(), 'hash' => sha1($notifiable->getEmailForVerification())]
         );
     }
 }
