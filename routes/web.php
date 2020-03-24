@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::middleware('verified:user')->group( function() {
+Route::middleware('verified')->group( function() {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
@@ -28,7 +28,7 @@ Route::group(['namespace' => 'Social', 'prefix' => 'social', 'name' => 'social.'
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'name' => 'admin.', 'as' => 'admin.'], function() {
     Auth::routes(['verify' => true, 'reset' => true]);
-    Route::middleware('verified:admin')->group( function() {
+    Route::middleware('verified')->group( function() {
         Route::get('/', 'HomeController@index')->name('home');
         Route::get('/home', 'HomeController@index')->name('home');
     });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Social\Auth;
 
 use App\Social;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -38,7 +39,13 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:user')->except('logout');
+    }
+
+    // Guardの認証方法を指定
+    protected function guard()
+    {
+        return \Auth::guard('user');
     }
 
     /**
@@ -59,7 +66,7 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             return redirect('/login');
         }
-        
+
         $request->session()->flash('_old_input', ['name' => $social_user->name, 'email' => $social_user->email]);
         $request->session()->flash('social_data', ['provider_id' => $social_user->id, 'provider_name' => $provider, 'avatar' => $social_user->avatar]);
 

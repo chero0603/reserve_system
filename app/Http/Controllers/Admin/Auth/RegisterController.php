@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Admin;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/home';
+    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
     /**
      * Create a new controller instance.
@@ -38,6 +39,11 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest:admin');
+    }
+
+    protected function guard()
+    {
+        return \Auth::guard('admin');
     }
 
     public function showRegistrationForm()
@@ -73,10 +79,5 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-    }
-
-    protected function guard()
-    {
-        return \Auth::guard('admin');
     }
 }
