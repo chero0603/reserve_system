@@ -4,10 +4,17 @@
     "Forgot Your Password?": "パスワードを忘れた場合",
     "Reset Password": "パスワード再設定",
     "Send Password Reset Link":  "パスワード再設定URLを送信",
+    "Logout": "ログアウト",
 
     "Name": "お名前",
     "E-Mail Address": "メールアドレス",
     "Password": "パスワード",
     "Confirm Password": "パスワード(確認用)",
-    "Remember Me": "ログイン状態を保存"
+    "Remember Me": "ログイン状態を保存",
+
+    "Verify Your Email Address": "メールアドレスを認証してください",
+    "A fresh verification link has been sent to your email address.": "新規の認証リンクを再度送信しました",
+    "Before proceeding, please check your email for a verification link.": "送信メール内の認証リンクをから認証を行ってください。",
+    "If you did not receive the email,": "メールが届いていない場合、",
+    "click here to request another.": "こちらをクリックで再度メール送信します。"
 }
